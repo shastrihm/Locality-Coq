@@ -22,7 +22,7 @@ Theorem point_locality_closed_form_standard_binary :
 ```
 
 **Intermediate results:**
-As part of building up the machinery to prove the main result, we've included a number relatively lightweight formalisms. These include:
+As part of building up the machinery to prove the main result, we've included a number of relatively lightweight formalisms. These include:
 - Miscellaneous properties for natural numbers (these are relatively trivial)
 - Definition and properties for absolute differences ($|a - b|$).
 - Definition and properties of exponentiation
@@ -32,7 +32,7 @@ As part of building up the machinery to prove the main result, we've included a 
 - Formalizing inner point locality (for a single bitstring) and point locality (inner point locality summed over all possible length l bitstrings)
 
 From here, the series of intermediate helper theorems/lemmas that bring us to the main result are
-- Lemmas for absolute differneces between single bit-flipped bitstrings in standard binary
+- Lemmas for absolute differences between single bit-flipped bitstrings in standard binary
 - Equivalence between inner point locality and sum of powers of 2
 - Theorem for closed form for inner point locality
 - Lemma showing point locality for standard binary is only dependent on the length of the bitstrings
@@ -45,7 +45,7 @@ Apart from the Coq standard library, the only external code we include in `Local
 ### How to Run
 This was developed with Coq version `8.18.0`.
 The only dependencies are from Coq's standard library -- basic machinery to reason with bools, nats, and lists. 
-You can run this by:
+To run this:
 
 - Download this repo and follow the instructions to install and run [vscoq](https://github.com/coq/vscoq).
 
