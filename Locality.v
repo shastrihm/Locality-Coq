@@ -14,7 +14,10 @@ Open Scope nat_scope.
 Open Scope bool_scope.
 
 
-(* We use a list of bools as our representation of a bitstring *)
+(* We use a list of bools as our representation of a bitstring.
+   In our formalization, the most significant bit (msb) is the rightmost 
+   bit in the list.
+*)
 
 Definition bin := list bool.
 
@@ -584,7 +587,77 @@ Proof.
     - apply all_enumerated_bitstrings_have_length_n.
 Qed.
 
-     
+(********************************************************)
+
+(* Now, we attempt to show the same closed form, 
+   but for Binary reflected gray (BRG) encoding *)
+
+
+(* First, lets define BRG encoding *)
+
+
+(* The XOR of two booleans *)
+Definition xor (b1 b2 : bool) : bool :=
+  match b1, b2 with
+  | false, false => false
+  | false, true  => true
+  | true, false  => true
+  | true, true   => false
+  end.
+
+(** Convert a BRG bitstring to a standard binary bitstring *)
+Fixpoint brg_to_binary (g : bin) (prev_bit : bool) : bin :=
+  match g with
+  | [] => []
+  | x :: xs => (xor prev_bit x) :: (brg_to_binary xs (xor prev_bit x))
+  end.
+
+
+
+(* Convert BRG to nat *)
+(* We have to reverse the input because we are operating with 
+   most significant bit as the rightmost, while the brg_to_binary 
+   requires most significant bit to be the leftmost *)
+Definition brg_to_nat (g : bin) : nat :=
+  match rev g with
+  | [] => 0
+  | x :: xs => standard_bin_to_nat (rev (x :: brg_to_binary xs x))
+  end.
+
+
+Example test_brg_to_nat_1 :
+  brg_to_nat [false;false;false;true] = 15.
+Proof. 
+    unfold brg_to_nat.
+    simpl. 
+    reflexivity. 
+Qed.
+
+Example test_brg_to_nat_2 :
+  brg_to_nat [false;true;true;false] = 4.
+Proof. 
+    unfold brg_to_nat.
+    simpl. 
+    reflexivity. 
+Qed.
+
+Example test_brg_to_nat_3 :
+  brg_to_nat [false;false;false] = 0.
+Proof. 
+    unfold brg_to_nat.
+    simpl. 
+    reflexivity. 
+Qed.
+
+Example test_brg_to_nat_4 :
+  brg_to_nat [true;true;true;true] = 10.
+Proof. 
+    unfold brg_to_nat.
+    simpl. 
+    reflexivity. 
+Qed.
+
+
 
 
 
