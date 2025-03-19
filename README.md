@@ -4,7 +4,7 @@
 
 `Locality.v` is a Coq script that formalizes and proves a version of Corollary 2 from [this paper](https://arxiv.org/pdf/2007.12159).
 
-**Main Theorem:** The main result we prove is that the point locality of the standard binary encoding  evaluates to a closed form $2^{n} \cdot (2^{n} - 1)$. 
+**Main Theorem:** The main result we prove is that the point locality of the standard binary encoding on $n$ bits evaluates to a closed form $2^{n} \cdot (2^{n} - 1)$. 
 
 **Background:**
 Point locality is a combinatorial property of binary-integer representations. A representation is a mapping from the set of all length $l$ bitstrings to the natural number interval $[0, 2^{l})$.  
